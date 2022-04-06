@@ -1,0 +1,23 @@
+{
+  "name": "modern-js-developement-module",
+  "version": "1.0.0",
+  "description": "Modern JS",
+  "default": "index.html",
+  "browserslist": "> 1%, last 2 versions, not dead, not ie 11",
+  "targets": {
+    "main": false
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start":"parcel index.html",
+    "build":"parcel build index.html --dist-dir ./dist"
+  },
+  "author": "raul",
+  "license": "ISC",
+  "dependencies": {
+    "lodash-es": "^4.17.21"
+  },
+  "devDependencies": {
+    "parcel": "^2.4.1"
+  }
+}
