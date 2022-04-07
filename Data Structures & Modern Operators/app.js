@@ -486,4 +486,268 @@ const game = {
 ///**------------------------------------------------------ SETS---------------------------------------------*/
 
 
+//SET is a collection of UNIQUE values.Its not the replacement of array at all.
 
+/*
+
+const orderSet = new Set(['pizza', 'pasta', 'pizza', 'pasta', 'macroni', 'tacos', 'burritos']);
+console.log(orderSet);
+console.log(new Set('jonas'));
+
+//**------Methods on SET
+
+//SIZE
+console.log(orderSet.size);
+
+//HAS
+console.log(orderSet.has('pizza'));
+
+//ADD
+console.log(orderSet.add('rolls'));
+
+//DELETE
+console.log(orderSet.delete('pasta'));
+console.log(orderSet);
+
+//CLEAR
+//orderSet.clear();
+console.log(orderSet);
+
+//USE of loop
+
+for (const ele of orderSet) { console.log(ele) };
+
+
+//USE CASE --  converting array to set and then back to array with unique values.
+
+const nonUnqArr = ['waiter', 'chef', 'guest', 'manager', 'chef', 'guest', 'receptionist'];
+console.log(nonUnqArr);
+const unqArrSet = new Set(nonUnqArr); //new set created.
+console.log(unqArrSet);
+const unqArr = [...unqArrSet];
+console.log(unqArr);
+console.log(unqArrSet.size);
+
+*/
+
+
+
+
+
+
+
+///**------------------------------------------------------ MAPS ---------------------------------------------*/
+
+//MAPS are basically like OBJECT and contains key/value pairs..Difference is MAPS can have any kind of key where as obejects in general have String type key.
+
+/*
+
+const newMap = new Map([['name', 'Italiano Classico'], ['foundedIn', 1990], [true, 'we are open '], [false, 'We are close'], [1, 'Frenzy,Italy'], ['category', ['Italisan', 'Pizzerria', 'Vegetarian', 'rganic']]]);
+
+newMap.set('open', 11).set('close', 23);
+console.log(newMap);
+
+//GET ELEMENTS
+
+console.log(newMap.get(true));
+
+//HAS Property
+
+console.log(newMap.has('foundedIn'));
+
+//DELETE Property
+
+console.log(newMap.delete('category'));
+console.log(newMap)
+
+//SIZE Property
+
+console.log(newMap.size);
+
+//Setting up array
+
+const arr = [1, 2];
+newMap.set(arr, 'test');
+console.log(newMap);
+console.log(newMap.get(arr));
+
+//CLEAR
+
+console.log(newMap.clear());
+
+*/
+
+
+
+
+
+///**------------------------------------------------------ MAPS - ITERATION---------------------------------------------*/
+
+/*
+
+const newMap = new Map([['name', 'Italiano Classico'], ['foundedIn', 1990], [true, 'we are open '], [false, 'We are close'], [1, 'Frenzy,Italy'], ['category', ['Italisan', 'Pizzerria', 'Vegetarian', 'rganic']]]);
+
+for (const [key, value] of newMap) { 
+    console.log(`Values for key ${key} is ${value}`)
+}
+
+
+//CONVERT MAP TO ARRAY
+
+console.log([...newMap]);
+
+//CONVERT OBJECT to MAP
+
+const mapObj = new Map(Object.entries(restaurant.openingHours));
+console.log(mapObj);
+
+*/
+
+
+
+
+///**-------------------------------------------------------- STRING ---------------------------------------------------*/
+
+//----PART -1 -----
+/*
+const airline = 'TAP Air Portugal';
+const plane = 'A320';
+console.log(plane[0]);
+console.log(plane[1]);
+console.log(plane[2]);
+console.log('B737'[0]);
+console.log(airline.length);
+console.log('B737'.length);
+console.log(airline.indexOf('r'));
+console.log(airline.lastIndexOf('r'));
+console.log(airline.indexOf('portugal'));
+console.log(airline.slice(4));
+console.log(airline.slice(4, 7));
+console.log(airline.slice(0, airline.indexOf(' ')));
+console.log(airline.slice(airline.lastIndexOf(' ') + 1));
+console.log(airline.slice(-2));
+console.log(airline.slice(1, -1));
+const checkMiddleSeat = function (seat) {
+  // B and E are middle seats
+  const s = seat.slice(-1);
+  if (s === 'B' || s === 'E') console.log('You got the middle seat 😬');
+  else console.log('You got lucky 😎');
+};
+checkMiddleSeat('11B');
+checkMiddleSeat('23C');
+checkMiddleSeat('3E');
+console.log(new String('jonas'));
+console.log(typeof new String('jonas'));
+console.log(typeof new String('jonas').slice(1));
+
+*/
+
+//----PART -2 ----
+
+/*
+const airline = 'TAP Air Portugal';
+console.log(airline.toLowerCase());
+console.log(airline.toUpperCase());
+
+
+// Fix capitalization in name
+const passenger = 'jOnAS'; // Jonas
+const passengerLower = passenger.toLowerCase();
+const passengerCorrect =
+  passengerLower[0].toUpperCase() + passengerLower.slice(1);
+console.log(passengerCorrect);
+
+
+// Comparing emails
+const email = 'hello@jonas.io';
+const loginEmail = '  Hello@Jonas.Io \n';
+// const lowerEmail = loginEmail.toLowerCase();
+// const trimmedEmail = lowerEmail.trim();
+const normalizedEmail = loginEmail.toLowerCase().trim();
+console.log(normalizedEmail);
+console.log(email === normalizedEmail);
+
+
+// replacing
+const priceGB = '288,97£';
+const priceUS = priceGB.replace('£', '$').replace(',', '.');
+console.log(priceUS);
+const announcement =
+  'All passengers come to boarding door 23. Boarding door 23!';
+console.log(announcement.replace('door', 'gate'));
+// console.log(announcement.replaceAll('door', 'gate'));
+console.log(announcement.replace(/door/g, 'gate'));
+
+
+// Booleans
+const plane = 'Airbus A320neo';
+console.log(plane.includes('A320'));
+console.log(plane.includes('Boeing'));
+console.log(plane.startsWith('Airb'));
+if (plane.startsWith('Airbus') && plane.endsWith('neo')) {
+  console.log('Part of the NEW ARirbus family');
+}
+
+
+// Practice exercise
+const checkBaggage = function (items) {
+  const baggage = items.toLowerCase();
+  if (baggage.includes('knife') || baggage.includes('gun')) {
+    console.log('You are NOT allowed on board');
+  } else {
+    console.log('Welcome aboard!');
+  }
+};
+checkBaggage('I have a laptop, some Food and a pocket Knife');
+checkBaggage('Socks and camera');
+checkBaggage('Got some snacks and a gun for protection');
+
+*/
+
+
+//-----PART -3 -----
+
+/*
+
+// Split and join
+console.log('a+very+nice+string'.split('+'));
+console.log('Jonas Schmedtmann'.split(' '));
+const [firstName, lastName] = 'Jonas Schmedtmann'.split(' ');
+const newName = ['Mr.', firstName, lastName.toUpperCase()].join(' ');
+console.log(newName);
+const capitalizeName = function (name) {
+  const names = name.split(' ');
+  const namesUpper = [];
+  for (const n of names) {
+    // namesUpper.push(n[0].toUpperCase() + n.slice(1));
+    namesUpper.push(n.replace(n[0], n[0].toUpperCase()));
+  }
+  console.log(namesUpper.join(' '));
+};
+capitalizeName('jessica ann smith davis');
+capitalizeName('jonas schmedtmann');
+
+// Padding
+const message = 'Go to gate 23!';
+console.log(message.padStart(20, '+').padEnd(30, '+'));
+console.log('Jonas'.padStart(20, '+').padEnd(30, '+'));
+const maskCreditCard = function (number) {
+  const str = number + '';
+  const last = str.slice(-4);
+  return last.padStart(str.length, '*');
+};
+console.log(maskCreditCard(64637836));
+console.log(maskCreditCard(43378463864647384));
+console.log(maskCreditCard('334859493847755774747'));
+
+// Repeat
+const message2 = 'Bad waether... All Departues Delayed... ';
+console.log(message2.repeat(5));
+const planesInLine = function (n) {
+  console.log(`There are ${n} planes in line ${'🛩'.repeat(n)}`);
+};
+planesInLine(5);
+planesInLine(3);
+planesInLine(12);
+
+*/
