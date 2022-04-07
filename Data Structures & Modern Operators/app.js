@@ -8,7 +8,21 @@ const restaurant = {
     mainMenu: ['Pizza', 'Pasta', 'Risotto'],
     order: function (starterIndex, mainIndex) {
         return [this.starterMenu[starterIndex], this.mainMenu[mainIndex]];
-     }
+    },
+    openingHours: {
+        thu: {
+            open:12,
+            close:22,
+        },
+        fri: {
+            open:11,
+            close:23,
+        },
+        sat: {
+            open:0,
+            close:24,
+        }
+    }
 }
 
 console.log(restaurant);
@@ -54,6 +68,39 @@ console.log(defVal1a,defVal2a,defVal3a);
 
 
 
+
+
 //**------------------------------------------------- DESTRUCTURING OBJECT  --------------------------------*/
 
+//Destructuring the object
 
+const { name, openingHours, categories } = restaurant;
+console.log(name, openingHours, categories);
+
+
+//Destructuring with Alias Name
+
+const { name: restaurantName, openingHours: hours, categories: tags } = restaurant;
+console.log(restaurantName, hours, tags);
+
+
+//Destructuring with default value
+
+const { menu = [], starterMenu: starter = [] } = restaurant;
+console.log(menu, starter);
+
+//Destructuring nested object
+
+const { thu:{open,close} } = restaurant.openingHours;
+console.log(open, close);
+
+//Destructuring Mutated object
+
+
+let a = 111;
+let b = 222;
+const mutArrr = { a: 11, b: 22, c: 33 };
+// const { m1, m2 } = mutArrr;
+// console.log(m1, m2);
+({ a, b } = mutArrr)
+console.log(a, b);
