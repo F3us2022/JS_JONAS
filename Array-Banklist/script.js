@@ -65,13 +65,13 @@ const inputClosePin = document.querySelector('.form__input--pin');
 /////////////////////////////////////////////////
 // LECTURES
 
-const currencies = new Map([
-  ['USD', 'United States dollar'],
-  ['EUR', 'Euro'],
-  ['GBP', 'Pound sterling'],
-]);
+// const currencies = new Map([
+//   ['USD', 'United States dollar'],
+//   ['EUR', 'Euro'],
+//   ['GBP', 'Pound sterling'],
+// ]);
 
-const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+// const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 
 /////////////////////////////////////////////////
 
@@ -128,3 +128,88 @@ console.log(arr.at(-1)); //Method-3
 */
 
 //**---------------------------------------- LOOPING USING FOR EACH METHOD ------------------------------------------- */
+
+/*
+const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+
+//------USING 'FOR OF'
+
+console.log('---------------------- For Of LOOP--------------------');
+for (const move of movements) {
+  if (move > 0) {
+    console.log(`You have deposited ${move}`);
+  } else {
+    console.log(`You have withdrawn ${Math.abs(move)}`);
+  }
+}
+
+//------USING 'FOREACH'
+console.log('---------------------- ForEach LOOP--------------------');
+
+movements.forEach(function (move) {
+  if (move > 0) {
+    console.log(`You have deposited ${move}`);
+  } else {
+    console.log(`You have withdrawn ${Math.abs(move)}`);
+  }
+});
+
+//------GETTING THE COUNTER VARIABLE USING 'For Of' and 'ForEach' LOOPS
+
+//------USING 'FOR OF'
+
+console.log('---------------------- For Of LOOP--------------------');
+for (const [index, move] of movements.entries()) {
+  if (move > 0) {
+    console.log(`Movement ${index + 1}: You have deposited ${move}`);
+  } else {
+    console.log(`Movement ${index + 1}: You have withdrawn ${Math.abs(move)}`);
+  }
+}
+
+console.log('---------------------- ForEach LOOP--------------------');
+
+movements.forEach(function (move, index, array) {
+  if (move > 0) {
+    console.log(`Movement ${index + 1}: You have deposited ${move}`);
+  } else {
+    console.log(`Movement ${index + 1}: You have withdrawn ${Math.abs(move)}`);
+  }
+});
+
+*/
+
+//**---------------------------------------- 'FOR EACH' LOOP ON MAP AND SET ------------------------------------------- */
+
+/*
+
+//-----ForEach on MAP
+
+const currencies = new Map([
+  ['USD', 'United States dollar'],
+  ['EUR', 'Euro'],
+  ['GBP', 'Pound sterling'],
+]);
+
+currencies.forEach(function (value, key, array) {
+  console.log(`${key}: ${value}`);
+});
+
+//------ForEach on SET
+
+const currenciesUnique = new Set(['CAD', 'USD', 'CAD', 'INR', 'EUR', 'AED']);
+
+currenciesUnique.forEach(function (value, key, array) {
+  //console.log(`${key}:${value}`); // SETS doesnot have indexes so it cant have keys
+  console.log(`${value}`);
+});
+
+//-----ForEach on OBJECT
+
+const currObg = Object.fromEntries(currencies);
+console.log(currObg);
+Object.entries(currObg).forEach(function ([keyName, value], key, array) {
+  console.log(`${keyName}:${value}`);
+});
+
+*/
