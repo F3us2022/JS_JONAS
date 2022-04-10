@@ -178,5 +178,5 @@ console.log(newAddVat(100));
 //**------------------------------------- IMMEDIATELY INVOKED FUNCTION EXPRESSION  ---------------------------------------*/
 
 (function () {
-    console.log(`This is an IIFE.`);
+    console.log(`This is an IIFE without parameter.`);
 })();
