@@ -74,3 +74,57 @@ const currencies = new Map([
 const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 
 /////////////////////////////////////////////////
+
+//**--------------------------------------------------- SIMPLE ARRAY METHODS ------------------------------------------- */
+/*
+let arr = ['a', 'b', 'c', 'd', 'e'];
+
+//----------SLICE (Doesnt changes the orignal array.Creates a new array with changes)
+
+console.log(arr.slice(1));
+console.log(arr.slice(1, 3));
+console.log(arr.slice(-1));
+console.log(arr.slice(1, -2));
+console.log(arr.slice()); //-----------> way of copying as array
+console.log([...arr]); //--------------> Another way of copying an array
+
+//---------SPLICE  (Changes the orignal array)
+
+console.log(arr.splice(1));
+console.log(arr);
+
+console.log(arr.splice(-2));
+console.log(arr);
+
+//--------REVERSE
+
+const arrNew = ['a', 'b', 'c', 'd', 'e', 'f'];
+console.log(arrNew.reverse());
+
+//--------CONCAT
+
+const arr1 = [1, 2, 3, 4];
+const arr2 = [5, 6, 7, 8];
+console.log(arr1.concat(arr2)); // Concating 2 arrays method 1
+console.log([...arr1, ...arr2]); // Concating 2 arrays method 2
+
+//--------JOIN
+
+console.log(arr1.concat(arr2).join('-'));
+*/
+
+//**--------------------------------------------------- ARRAY 'AT' METHOD ------------------------------------------- */
+
+/*
+const arr = [11, 22, 64, 58];
+console.log(arr[0]);
+console.log(arr.at(0));
+
+//Getting last array element
+
+console.log(arr[arr.length - 1]); //Method-1
+console.log(arr.slice(-1)[0]); //Method-2
+console.log(arr.at(-1)); //Method-3
+*/
+
+//**---------------------------------------- LOOPING USING FOR EACH METHOD ------------------------------------------- */
