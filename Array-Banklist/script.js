@@ -144,6 +144,7 @@ console.log(accounts);
 
 //**------------------------------------------ ADDING BALANCE USING THE REDUCE FUNCTION ----------------------------------- */
 
+/*
 const calDisplayBalance = function (movements) {
   const balance = movements.reduce(function (acc, mov) {
     return acc + mov;
@@ -151,7 +152,15 @@ const calDisplayBalance = function (movements) {
   labelBalance.textContent = `${balance} €`;
 };
 
-// calDisplayBalance(account1.movements);
+calDisplayBalance(account1.movements);
+*/
+
+const calDisplayBalance = function (accnt) {
+  accnt.balance = accnt.movements.reduce(function (acc, mov) {
+    return acc + mov;
+  }, 0);
+  labelBalance.textContent = `${accnt.balance} €`;
+};
 
 //
 
@@ -225,7 +234,7 @@ const calDisplaySummary = function (accnt) {
       return val > 0;
     })
     .map(function (valFil) {
-      return (valFil * accnt.interest) / 100;
+      return (valFil * accnt.interestRate) / 100;
     })
     .filter(function (valMap) {
       return valMap >= 1;
@@ -249,11 +258,9 @@ btnLogin.addEventListener('click', function (e) {
   //Prevent Form from submitting
 
   e.preventDefault();
-
+  console.log(inputLoginUsername.value);
   currentAccount = accounts.find(function (accnt) {
-    // console.log('btn clicked', inputLoginUsername.value, accnt.username);
-    // return accnt.username === inputLoginUsername.value;
-    return 1;
+    return accnt.username === inputLoginUsername.value.trim('');
   });
 
   console.log(currentAccount);
@@ -271,19 +278,113 @@ btnLogin.addEventListener('click', function (e) {
 
     inputLoginPin.value = inputLoginUsername.value = ' ';
 
+    /*
     //DISPLAY MOVEMENTS
 
     displayMovements(currentAccount.movements);
 
     //DISPLAY BALANCE
 
-    calDisplayBalance(currentAccount.movements);
+    calDisplayBalance(currentAccount);
 
     //DISPLAY SUMMARY
 
     calDisplaySummary(currentAccount);
+    */
+
+    updateUI(currentAccount);
   }
 });
+
+//
+
+//
+
+//**------------------------------------- EVENT HANDLERS -> IMPLEMENTING TRANSFER ---------------------------------------- */
+
+//
+
+btnTransfer.addEventListener('click', function (e) {
+  //Prevent Form Refresh
+
+  e.preventDefault();
+
+  //--Get amount and verify amount
+
+  const amount = Number(inputTransferAmount.value);
+  const receiverAcc = accounts.find(function (accn) {
+    return accn.username === inputTransferTo.value.trim(' ');
+  });
+
+  //Verify amount and the user
+
+  if (
+    amount > 0 &&
+    currentAccount.balance > amount &&
+    receiverAcc?.username !== currentAccount.username
+  ) {
+    console.log(receiverAcc);
+    currentAccount.movements.push(-amount);
+    receiverAcc.movements.push(amount);
+  }
+
+  inputTransferAmount.value = inputTransferTo.value = ' ';
+  updateUI(currentAccount);
+});
+//
+
+//
+
+//
+
+//**-------------------------- EVENT HANDLERS -> CLOSING ACCOUNT USING FINDINDEX METHOD ---------------------------------- */
+
+//
+
+btnClose.addEventListener('click', function (e) {
+  e.preventDefault();
+
+  //find the index of the account from the ACCOUNTS array and SPLICE it.
+
+  if (
+    currentAccount.username === inputCloseUsername.value.trim(' ') &&
+    currentAccount.pin === Number(inputClosePin.value)
+  ) {
+    const accountIndex = accounts.findIndex(function (accn) {
+      return accn.username === currentAccount.username;
+    });
+    console.log(accountIndex);
+  }
+
+  //Reset
+
+  inputCloseUsername.value = inputClosePin.value = ' ';
+
+  //Delete Account
+  accounts.splice(currentAccount, 1);
+});
+//
+
+//
+
+//
+
+//**-------------------------------------------- EVENT HANDLERS -> UPDATE UI -------------------------------------------- */
+
+//
+
+//DISPLAY MOVEMENTS
+const updateUI = function (currAccnt) {
+  displayMovements(currentAccount.movements);
+
+  //DISPLAY BALANCE
+
+  calDisplayBalance(currentAccount);
+
+  //DISPLAY SUMMARY
+
+  calDisplaySummary(currentAccount);
+};
 //
 
 //
