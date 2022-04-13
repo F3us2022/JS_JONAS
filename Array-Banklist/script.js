@@ -65,9 +65,19 @@ const inputClosePin = document.querySelector('.form__input--pin');
 
 //**------------------------------------------- CREATING DOM ELEMENTS USING 'FOR EACH'------------------------------------ */
 
-const displayMovements = function (movement) {
+const displayMovements = function (movement, sortMovReq = false) {
   containerMovements.innerHTML = '';
-  movement.forEach(function (mov, index) {
+
+  //-----------------------------------------IMPLEMENTING SORTING USING SORT----------------------------------------
+  const movs = sortMovReq
+    ? movement.slice().sort(function (a, b) {
+        return a < b ? 1 : -1;
+      })
+    : movement;
+
+  //
+
+  movs.forEach(function (mov, index) {
     const type = mov > 0 ? 'deposit' : 'withdrawal';
     //  console.log(type);
     const html = `<div class="movements__row">
@@ -337,6 +347,41 @@ btnTransfer.addEventListener('click', function (e) {
 
 //
 
+//**-------------------------- EVENT HANDLERS -> LOAN REQUEST USING SOME METHOD ---------------------------------- */
+
+//
+
+btnLoan.addEventListener('click', function (e) {
+  e.preventDefault();
+
+  // Get the amount and check for validation is it is 10% of the deposit
+
+  const amount = Number(inputLoanAmount.value);
+  if (
+    amount > 0 &&
+    currentAccount.movements.some(function (mov) {
+      return mov >= amount * 0.1;
+    })
+  ) {
+    //ADD the LOAN AMOUNT
+
+    currentAccount.movements.push(amount);
+
+    //UPDATE the UI
+
+    updateUI(currentAccount);
+
+    //RESET the FIELD
+
+    inputLoanAmount.value = ' ';
+  }
+});
+//
+
+//
+
+//
+
 //**-------------------------- EVENT HANDLERS -> CLOSING ACCOUNT USING FINDINDEX METHOD ---------------------------------- */
 
 //
@@ -385,6 +430,26 @@ const updateUI = function (currAccnt) {
 
   calDisplaySummary(currentAccount);
 };
+
+//
+
+//
+
+//
+
+//**-------------------------------------------- EVENT HANDLERS -> SORT MOVEMENTS -------------------------------------------- */
+
+//
+
+let sorted = false;
+btnSort.addEventListener('click', function (e) {
+  e.preventDefault();
+
+  //call the display movement function passing the sort
+
+  displayMovements(currentAccount.movements, !sorted);
+  sorted = !sorted;
+});
 //
 
 //
@@ -675,3 +740,222 @@ const totalDepositeUSD = movements
   }, 0);
 console.log(totalDepositeUSD);
 */
+
+//
+
+//
+//**--------------------------------------------------- SOME and EVERY METHODS -------------------------------------------- */
+//
+
+//
+
+/*
+
+//----------------------****************** USING SOME METHOD ******************
+
+
+// SOME is like INCLUDES method , only difference is INCLUDES gives absolute equality whereas SOME is used to check a condition.
+
+const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+const someDeposit = movements.some(function (val) {
+  return val > 0;
+});
+console.log(someDeposit);
+
+//----------------------****************** USING EVERY METHOD ******************
+
+//Returns only is all values matches
+
+console.log(
+  movements.every(function (mov) {
+    return mov > 0;
+  })
+);
+
+//Using callbacks
+
+const deposit = mov => mov > 0;
+console.log(movements.some(deposit));
+
+console.log(movements.every(deposit));
+
+console.log(movements.filter(deposit));
+
+* /
+
+//
+
+//
+
+//
+//**------------------------------------------------- FLAT and FLATMAP METHODS -------------------------------------------- */
+//
+
+//
+
+/*
+
+//Flat is use to flatene an array to any level to create a sigle dimension array.Also Flat isnot a have a higher order function
+
+const arr = [[1, 2, 3], [4, 5, 6], 7, 8];
+const flatArr = arr.flat();
+console.log(flatArr);
+
+//now flatening to deeper level
+
+const arrDeep = [[[1, 2], 3], [4, [5, 6]], 7, 8];
+const flatArrDeep = arrDeep.flat();
+console.log(flatArrDeep);
+
+const flatArrDeepLevel = arrDeep.flat(2);
+console.log(flatArrDeepLevel);
+
+//Using the same logic to FLAT and get some of the total movements
+
+// first get the array for movements
+
+const accountMovement = accounts.map(function (mov) {
+  return mov.movements;
+});
+console.log(accountMovement);
+
+const allMovements = accountMovement.flat();
+console.log(allMovements);
+
+const overallBalance = allMovements.reduce(function (acc, val) {
+  return acc + val;
+}, 0);
+
+console.log(overallBalance);
+
+//---------------***************Doing the above into method chaining
+
+const flatChaining = accounts
+  .map(function (mov) {
+    return mov.movements;
+  })
+  .flat()
+  .reduce(function (acc, mov) {
+    return mov + acc;
+  }, 0);
+console.log(flatChaining);
+
+//--------------------*********************** FLAT MAP ************************
+
+//FLAT MAP is combination of MAP and FLAT.but FLATMAP can only flat the array to single level and not deep level.Also FLATMAP is a higher order function
+
+const flatMapChaining = accounts
+  .flatMap(function (mov) {
+    return mov.movements;
+  })
+  .reduce(function (acc, mov) {
+    return acc + mov;
+  }, 0);
+console.log(flatMapChaining);
+
+*/
+
+//
+
+//
+
+//
+//**------------------------------------------------- SORTING METHODS -------------------------------------------- */
+//
+
+//
+
+/*
+
+// SORTING works on string .So when doing using number it considers it also as a STRING thats why we need to pass arguments and do the sorting.
+
+const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+console.log(movements.sort());
+
+//To correct the sorting using the arguments
+
+//**-----**---- For Ascending Order **----**----
+
+// return < 0 A,B (Keep the order) (A<B)
+// return > 0 B,A (Switch the order) (A>B)
+movements.sort(function (a, b) {
+  if (a > b) {
+    return 1;
+  }
+  if (a < b) {
+    return -1;
+  }
+});
+
+console.log(movements);
+
+//
+
+//**-----**---- For Descending Order **----**----
+
+// return > 0 B,A (SWITCH the order) (A<B)
+// return < 0 A,B (KEEP the order) (A>B)
+movements.sort(function (a, b) {
+  if (a > b) {
+    return -1;
+  }
+  if (a < b) {
+    return 1;
+  }
+});
+
+console.log(movements);
+
+//NOTE --> SORT mutate the orignal araay which we wont be needing in the orgnal wys on most cases so etter take a shallow copy using SLICE() method.
+
+// return < 0 A,B (Keep the order) (A<B)
+// return > 0 B,A (Switch the order) (A>B)
+
+const shallowSort = movements.slice().sort(function (a, b) {
+  if (a > b) {
+    return 1;
+  }
+  if (a < b) {
+    return -1;
+  }
+});
+
+console.log(shallowSort);
+
+*/
+
+//
+
+//
+
+//
+//**------------------------- CREATING AND FILLING ARRAY USING FILL() and FORM() METHODS -------------------------- */
+//
+
+//
+
+//Manual creation of array.
+
+const arr = [1, 2, 3, 4, 5, 6];
+console.log(arr);
+
+//-------------******************** USING FILL *************************
+
+//Programatically creating and filling the array
+
+const arrFill = new Array(7);
+console.log(arrFill);
+arrFill.fill(1);
+console.log(arrFill);
+
+//we can also define the position to fill particular value using fill
+
+arrFill.fill(23, 2, 4);
+console.log(arrFill);
+
+//---------------******************** USING FORM **************************
+
+const arrForm = Array.from({ length: 7 }, function (_, i) {
+  return i++;
+});
+console.log(arrForm);
