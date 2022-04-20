@@ -81,19 +81,33 @@ const inputClosePin = document.querySelector('.form__input--pin');
 /////////////////////////////////////////////////
 // Functions
 
-const displayMovements = function (movements, sort = false) {
+const formatMovementDate = function (dateVal) {
+  const calDaysPassed = (date1, date2) => { Math.round(Math.abs(date2 - date1) / (1000 * 60 * 60 * 24)) };
+  const daysPassed = calDaysPassed(new Date(), dateVal);
+  console.log(daysPassed);
+  const year = dateVal.getFullYear();
+  const month = `${dateVal.getMonth() + 1}`.padStart(2, 0);
+  const day = `${dateVal.getDate()}`.padStart(2);
+  return `${day}/${month}/${year}`;
+};
+
+const displayMovements = function (acc, sort = false) {
   containerMovements.innerHTML = '';
 
-  const movs = sort ? movements.slice().sort((a, b) => a - b) : movements;
+  const movs = sort ? acc.movements.slice().sort((a, b) => a - b) : acc.movements;
 
   movs.forEach(function (mov, i) {
     const type = mov > 0 ? 'deposit' : 'withdrawal';
 
+    const dateValue = new Date(acc.movementsDates[i]);
+    const displayDate = formatMovementDate(dateValue);
+    
     const html = `
       <div class="movements__row">
         <div class="movements__type movements__type--${type}">${
       i + 1
-    } ${type}</div>
+      } ${type}</div>
+              <div class="movements__date">${displayDate}</div>
         <div class="movements__value">${mov.toFixed(2)}€</div>
       </div>
     `;
@@ -142,7 +156,7 @@ createUsernames(accounts);
 
 const updateUI = function (acc) {
   // Display movements
-  displayMovements(acc.movements);
+  displayMovements(acc);
 
   // Display balance
   calcDisplayBalance(acc);
@@ -154,6 +168,14 @@ const updateUI = function (acc) {
 ///////////////////////////////////////
 // Event handlers
 let currentAccount;
+
+//Faking the login
+currentAccount = account1;
+updateUI(currentAccount);
+containerApp.style.opacity = 1; 
+
+//
+
 
 btnLogin.addEventListener('click', function (e) {
   // Prevent form from submitting
@@ -171,6 +193,18 @@ btnLogin.addEventListener('click', function (e) {
     }`;
     containerApp.style.opacity = 100;
 
+    //current date and time
+
+    const now = new Date();
+    const year = now.getFullYear();
+    const month = `${now.getMonth()+1}`.padStart(2,0);
+    const date = `${now.getDate()}`.padStart(2);
+    const hour = now.getHours();
+    const minute = now.getMinutes();
+    const reformatedDt = `${date}/${month}/${year}, ${hour}:${minute}`;
+    labelDate.textContent = reformatedDt;
+
+    
     // Clear input fields
     inputLoginUsername.value = inputLoginPin.value = '';
     inputLoginPin.blur();
@@ -198,6 +232,11 @@ btnTransfer.addEventListener('click', function (e) {
     currentAccount.movements.push(-amount);
     receiverAcc.movements.push(amount);
 
+    //ADD TRANSFER DATE
+
+    currentAccount.movementsDates.push(new Date().toISOString());
+    receiverAcc.movementsDates.push(new Date().toISOString());
+    
     // Update UI
     updateUI(currentAccount);
   }
@@ -211,6 +250,10 @@ btnLoan.addEventListener('click', function (e) {
   if (amount > 0 && currentAccount.movements.some(mov => mov >= amount * 0.1)) {
     // Add movement
     currentAccount.movements.push(amount);
+
+    //ADD TRANSFER DATE
+
+    currentAccount.movementsDates.push(new Date().toISOString());
 
     // Update UI
     updateUI(currentAccount);
@@ -376,10 +419,105 @@ console.log(+(2.27).toFixed(2));
 
 //**----------------------------------------------- NUMERIC SEPARATOR -------------------------------------------------- */
 
+//
+
 //--Used only to hep code readers a visual identification/Meaning of the value
 
+//
+
+/*
 const numSep = 234_124_000;
 console.log(numSep);
 
 const numSep2 = 21_31_391;
 console.log(numSep2);
+
+//Before BIGINT the range of number JAVASCRIPT could have processed.
+
+console.log(Number.MAX_SAFE_INTEGER);
+console.log(2 ** 53 + 1);
+console.log(2 ** 53 + 2);
+console.log(2 ** 53 + 3); //same o/p
+console.log(2 ** 53 + 4); //same o/p
+console.log(2 ** 53 + 5); //same o/p
+
+//USING BIGINT we can process the number beyond the MAX_SAFE_INTEGER
+
+console.log(483843024834204382340839483948320);
+//using the BIGINT transforming the above number
+
+console.log(483843024834204382340839483948320n);
+
+//ALL the mathematical operations works as usual on BIGINT like the normal INT
+
+console.log(20n * 30n);
+console.log(10n / 3n);
+console.log(10 / 3);
+
+*/
+
+//
+
+//
+
+
+//**----------------------------------------------- CREATING DATES -------------------------------------------------- */
+
+//
+
+
+/*
+
+//There are 4 ways to create DATES
+
+// Method -1
+
+const now = new Date();
+console.log(now);
+
+// Method - 2 (Using String Declaration)
+
+const dt = new Date('nov 24 2022 18:04:01');
+console.log(dt);
+console.log(new Date(account1.movementsDates[0]));
+
+//Method - 3 (Passing the year,month,date,hour,minute,seconds)
+
+console.log(new Date(2022, 1, 15, 18, 2, 44));
+
+//Method - 4 (unix date)
+
+console.log(new Date(0));
+console.log(new Date(3 * 24 * 60 * 60 * 1000));
+
+//
+//-----------------************** Methods in DATES ******************--/
+
+const futurDate = new Date(2022, 10, 19, 3, 1, 15);
+console.log(futurDate);
+console.log(futurDate.getFullYear());
+console.log(futurDate.getMonth());
+console.log(futurDate.getDate());
+console.log(futurDate.getDay());
+console.log(futurDate.getDate());
+console.log(futurDate.getMinutes());
+console.log(futurDate.getSeconds());
+console.log(futurDate.toISOString());
+console.log(futurDate.getTime());
+console.log(new Date(1668844875000));
+console.log(Date.now());
+
+//
+
+//
+
+//
+
+*/
+
+//**------------------------------------------ INTERNATIONALISATION WITH DATES --------------------------------------------- */
+
+//
+
+
+//
