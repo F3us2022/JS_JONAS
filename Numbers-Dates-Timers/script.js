@@ -84,7 +84,7 @@ const inputClosePin = document.querySelector('.form__input--pin');
 const formatMovementDate = function (dateVal) {
   const calDaysPassed = (date1, date2) => { Math.round(Math.abs(date2 - date1) / (1000 * 60 * 60 * 24)) };
   const daysPassed = calDaysPassed(new Date(), dateVal);
-  console.log(daysPassed);
+  //console.log(daysPassed);
   const year = dateVal.getFullYear();
   const month = `${dateVal.getMonth() + 1}`.padStart(2, 0);
   const day = `${dateVal.getDate()}`.padStart(2);
@@ -519,5 +519,110 @@ console.log(Date.now());
 
 //
 
+//
+
+/*
+
+const now = new Date();
+const options = {
+  hour: 'numeric',
+  minute: 'numeric',
+  day:'numeric',
+  month:'long',
+  year:'numeric',
+  weekday:'long'
+}
+
+const intlDay = new Intl.DateTimeFormat('en-us', options).format(now);
+console.log(intlDay);
+
+const locale = navigator.language;
+console.log(locale);
+
+const intlDayLocale = new Intl.DateTimeFormat(locale, options).format(now);
+console.log(intlDay);
+
+
 
 //
+
+//
+
+*/
+
+//**------------------------------------------ INTERNATIONALISATION WITH NUMBER ------------------------------------------ */
+
+//
+
+//
+
+/*
+
+const num = 13201293.123;
+const intlNumUS = new Intl.NumberFormat('en-us').format(num);
+console.log(intlNumUS);
+
+const intlNumInd = new Intl.NumberFormat('en-in').format(num);
+console.log(intlNumInd);
+
+
+const intlNumGBP = new Intl.NumberFormat('en-gb').format(num);
+console.log(intlNumGBP);
+
+const option = {
+  style:'currency',
+  unit:'celsius',
+  currency:'EUR',
+
+}
+
+const numEUR = 13201293.123;
+const intlNumEUR = new Intl.NumberFormat('en-us',option).format(num);
+console.log(intlNumEUR);
+
+
+const optionDegree = {
+  style:'percent',
+  unit:'celsius',
+  currency:'EUR',
+
+}
+
+const numTemp = 93.123;
+const intlNumTemp = new Intl.NumberFormat('en-us',optionDegree).format(num);
+console.log(intlNumTemp);
+
+*/
+
+//
+
+//
+
+//**------------------------------------------ TIMER - SETTIMEOUT & SETINTERVAL ------------------------------------------ */
+
+//
+
+//
+/*
+//--------------**************** SET TIMEOUT AND CANCELLING THE SET TIME OUT ****************--/
+
+const pizzaTimerOne = setTimeout( (ing1, ing2) => console.log(`Here is your pizza with ${ing1} and ${ing2}`), 4000, 'chicken', 'spinach' );
+
+const ingredient = ['spinach','mushroom']
+const pizzaTimer = setTimeout((ing1, ing2) => console.log(`Here is your pizza with ${ing1} and ${ing2}`), 4000, ...ingredient);
+console.log('waiting.......');
+// CANCELLING the TIME_OUT
+
+if (ingredient.includes('spinach')) { 
+  clearTimeout(pizzaTimer);
+}
+
+setTimeout(function() { console.log('Hello') },2000);
+
+//-----------***************** SET INTERVAL ******************--/
+
+const timeInterval = setInterval(function () {
+  const now = new Date();
+  console.log(now)
+}, 1000);
+*/
