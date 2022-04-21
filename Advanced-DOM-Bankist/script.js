@@ -102,3 +102,52 @@ document.querySelector('.btn--close-cookie').addEventListener('click', () => mes
 
 //
 
+//**---------------------------------------------- STYLE / ATTRIBUTE AND CLASSES ------------------------------------------*/
+
+//
+
+//
+
+//--------*************** STYLE ELEMENTS *******************--/
+
+message.style.backgroundColor = '#37383d';
+message.style.width = '120%';
+
+//
+
+//--------*************** READ STYLE USING (GETCOMPUTEDSTYLE) PROPERTY ***********---/
+
+//console.log(message.style.color);
+console.log(message.style.backgroundColor);
+
+console.log(getComputedStyle(message).backgroundColor);
+console.log(message.style.height);
+console.log(getComputedStyle(message).height);
+
+//
+
+//------*********** ADD STYLE TO THE EXISTING STYLE *************--/
+
+message.style.height = Number.parseFloat(getComputedStyle(message).height, 10) + 30 + 'px';
+
+//------*********** CHANGING THE ROOT STYLE VALUES *******--/
+
+document.documentElement.style.setProperty('--color-primary', 'Teal');
+
+//
+
+//---------*********** ATTRIBUTES ****************--/
+
+//-- READING AND SETTING ATTRIBUTES --> (STANDARD ATTRIBUTES)
+
+const logo = document.querySelector('.nav__logo');
+console.log(logo.src);
+console.log(logo.alt);
+console.log(logo.className);
+logo.alt = 'Beautiful Minimalist Logo';
+
+//-- READING AND SETTING ATTRIBUTES --> (NON-STANDARD ATTRIBUTES)
+
+console.log(logo.designer); // THIS DOESNT WORK AS THE ATTRIBUTE IS NON-STANDARD ATTRIBUTE,SO BELOW IS SOLUTION.
+console.log(logo.getAttribute('designer'));
+logo.setAttribute('company','bankist');
