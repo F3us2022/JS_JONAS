@@ -35,7 +35,97 @@ document.addEventListener('keydown', function (e) {
 //
 
 //
+//
 
+//**----------------------------------------------- PAGE NAVIGATION ----------------------------------------------------*/
+
+//
+
+//
+
+//-------------------****************** PAGE NAVIGATION WITHOUT DELAGATION *****************----/
+
+/*
+
+document.querySelectorAll('.nav__link').forEach(function (elem) {
+  elem.addEventListener('click', function (e) { 
+    e.preventDefault();
+
+    const id = this.getAttribute('href');
+    console.log(id);
+    document.querySelector(id).scrollIntoView({behavior:'smooth'});
+  })
+ })
+
+  */
+
+//-------------------****************** PAGE NAVIGATION WITH DELAGATION *****************----/
+
+// STEP 1 --> ADD event listener to the common arent element 
+// STEP 2 --> Determine what element originated the event 
+
+document.querySelector('.nav__links').addEventListener('click', function (e) {
+  e.preventDefault();
+  console.log(e);
+
+  //Matching the nav__link
+  
+  if (e.target.classList.contains('nav__link')) { 
+    const id = e.target.getAttribute('href');
+    console.log(id);
+    document.querySelector(id).scrollIntoView({behavior:'smooth'});
+  }
+ })
+
+//
+
+//
+
+//
+//
+
+//**----------------------------------------------- BUILDING TABBED COMPONENT ---------------------------------------------*/
+
+//
+
+//
+
+const tabs = document.querySelectorAll('.operations__tab'); 
+
+const tabsContainer= document.querySelector('.operations__tab-container');
+
+const tabsContent = document.querySelectorAll('.operations__content');
+
+tabsContainer.addEventListener('click', function (e) { 
+  e.preventDefault();
+
+  const clicked = e.target.closest('.operations__tab');
+  console.log(clicked);
+
+  //GUARD CLAUSE
+
+  if (!clicked) return;
+
+
+  //----------*********************  REMOVE ALL THE ACTIVE TAB  *****************---/
+  
+  tabs.forEach(function (eleTab)
+  {
+    eleTab.classList.remove('operations__tab--active');
+  })
+  tabsContent.forEach(function (eleContent) { 
+        eleContent.classList.remove('operations__content--active');
+
+  })
+  
+  //----------*********************  ACTIVE TAB  ********************************---/
+
+  clicked.classList.add('operations__tab--active');
+
+  //----------*********************  ACTIVATE CONTENT ***************************---/
+  console.log(clicked.dataset.tab);
+  document.querySelector(`.operations__content--${clicked.dataset.tab}`).classList.add('operations__content--active');
+})
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 //
@@ -48,6 +138,7 @@ document.addEventListener('keydown', function (e) {
 
 //--------*************** SELECTING ELEMENTS *******************--/
 
+/*
 const elem = document.querySelector('.header');
 console.log(elem);
 const allSelec = document.querySelectorAll('.section'); // not live thats why represented by NODES
@@ -58,7 +149,7 @@ const tagSelec = document.getElementsByTagName('button'); //Live elements thats 
 console.log(tagSelec);
 const classSelec = document.getElementsByClassName('btn'); //Live elements thats why have collection of elements
 console.log(classSelec);
-
+*/
 
 //---------************* CREATING ELEMENTS *********************--/
 
@@ -108,6 +199,8 @@ document.querySelector('.btn--close-cookie').addEventListener('click', () => mes
 
 //
 
+/*
+
 //--------*************** STYLE ELEMENTS *******************--/
 
 message.style.backgroundColor = '#37383d';
@@ -117,7 +210,7 @@ message.style.width = '120%';
 
 //--------*************** READ STYLE USING (GETCOMPUTEDSTYLE) PROPERTY ***********---/
 
-//console.log(message.style.color);
+console.log(message.style.color);
 console.log(message.style.backgroundColor);
 
 console.log(getComputedStyle(message).backgroundColor);
@@ -136,7 +229,7 @@ document.documentElement.style.setProperty('--color-primary', 'Teal');
 
 //
 
-//---------*********** ATTRIBUTES ****************--/
+//------******************* ATTRIBUTES *******************--/
 
 //-- READING AND SETTING ATTRIBUTES --> (STANDARD ATTRIBUTES)
 
@@ -150,4 +243,275 @@ logo.alt = 'Beautiful Minimalist Logo';
 
 console.log(logo.designer); // THIS DOESNT WORK AS THE ATTRIBUTE IS NON-STANDARD ATTRIBUTE,SO BELOW IS SOLUTION.
 console.log(logo.getAttribute('designer'));
-logo.setAttribute('company','bankist');
+logo.setAttribute('company', 'bankist');
+console.log(logo.getAttribute('src'));
+
+//-- READING AND SETTING ATTRIBUTES --> (DATA ATTRIBUTES)
+
+console.log(logo.dataset.versionNumber);
+
+//
+
+//------********************* CLASSES *********************--/
+
+//
+
+logo.classList.add('a');
+logo.classList.remove('b');
+logo.classList.toggle('c');
+logo.classList.contains('d');
+
+*/
+
+//
+
+//
+
+//
+
+//**---------------------------------------------- IMPLEMENTING SMOOTH SCROLLING ------------------------------------------*/
+
+//
+
+//
+
+// STEP 1 --> GET THE PROPERTY OF THE LINK AND THE SECTION TO WHICH GOING TO SCROLL TO
+
+const btnScrollTo = document.querySelector('.btn--scroll-to');
+const section1 = document.querySelector('#section--1');
+
+// STEP 2 --> CALL EVENT LISTNER ON THE LINK
+
+btnScrollTo.addEventListener('click', function (e) { 
+
+/*
+  //STEP 2 (a) --> applying the scrolling befaviour using OLD WAYS.
+
+  //STEP 2 (a1) --> Get the coordinates
+  const s1coords = section1.getBoundingClientRect();
+  console.log(s1coords);
+
+  console.log(e.target.getBoundingClientRect());
+
+  console.log('Current Scroll (X/Y)', window.pageXOffset, window.pageYOffset);
+  
+  console.log('Height/Width viewport', document.documentElement.clientHeight, document.documentElement.clientWidth);
+
+  //STEP 2 (a2) --> Apply scrolling (3 WAYS)
+
+  //window.scrollTo(s1coords.left, s1coords.top); // but this only works when page is at top and not in middle.
+  //window.scrollTo(s1coords.left + window.pageXOffset, s1coords.top + window.pageYOffset); // this works when page is at any position.
+  window.scrollTo({
+    left:s1coords.left+window.pageXOffset,
+    top:s1coords.top+window.pageYOffset,
+    behavior:'smooth'
+  })
+  
+*/
+  //
+
+  //STEP 2 (b) --> applying the scrolling befaviour using OLD WAYS.
+
+  section1.scrollIntoView({ behavior: 'smooth' });
+
+})
+
+//
+
+//
+
+//
+
+//**------------------------------------------- TYPES OF EVENTS AND EVENT HANDLERS -----------------------------------------*/
+
+//
+
+//
+
+/*
+const h1 = document.querySelector('h1');
+*/
+
+//
+
+//---------**************** Method --> 1 (OLD WAYS) ***********************--/
+
+
+// h1.onmouseenter = function (e) { alert('addEventListener: Great! You are reading the HEADING.') };
+
+
+//---------**************** Method --> 2 (MODERN WAYS) *********************--/
+
+/*
+h1.addEventListener('mouseenter', function () { 
+  alert('addEventListener: Great! You are reading the HEADING.')
+})
+*/
+
+//---------**************** Method --> 3 (REMOVING EVENT Method-1) **********--/
+
+/*
+const alertH1 = function (e) {
+  alert('addEventListener: Great! You are reading the HEADING.');
+
+  h1.removeEventListener('mouseenter', alertH1);
+};
+
+h1.addEventListener('mouseenter',alertH1);
+*/
+
+//---------**************** Method --> 4 (REMOVING EVENT Method-2) ***********--/
+
+/*
+const alertH1 = function (e) {
+  alert('addEventListener: Great! You are reading the HEADING.');
+};
+
+h1.addEventListener('mouseenter',alertH1);
+
+setTimeout(() => {
+  h1.removeEventListener('mouseenter', alertH1);
+}, 4000);
+
+*/
+
+//
+
+//
+
+//
+
+//**---------------------------------- EVENT PROPOGATION -BUBBLING/CAPTUIRNG IN PRACTICE  --------------------------------*/
+
+//
+
+//
+
+/*
+
+const randomInt = function (min, max) { return Math.floor(Math.random() * (max - min + 1) + min) };
+console.log(randomInt(0, 7));
+
+const randomColor = function () {
+  return `rgb(${randomInt(0, 255)},${randomInt(0, 255)},${randomInt(0, 255)})`
+};
+console.log(randomColor());
+*/
+
+//---------------******************** EVENT BUBBLING PROPAGATION *************************
+
+/*
+
+//child-level-2
+document.querySelector('.nav__link').addEventListener('click', function (e) {
+  this.style.backgroundColor = randomColor();
+  console.log('LINK - ','Target : ',e.target,'Current-Target',e.currentTarget);
+  console.log('this',this);
+});
+
+//child-level-1
+document.querySelector('.nav__links').addEventListener('click', function (e) {
+  this.style.backgroundColor = randomColor();
+  console.log('CONTAINER - ','Target : ',e.target,'Current-Target',e.currentTarget);
+  console.log('this',this);});
+
+//parent
+document.querySelector('nav').addEventListener('click', function (e) {
+  this.style.backgroundColor = randomColor();
+  console.log('NAV PARENT - ','Target : ',e.target,'Current-Target',e.currentTarget);
+  console.log('this',this);});
+
+*/
+
+//---------------******************** STOP EVENT BUBBLING PROPAGATION *************************
+
+/*
+
+//child-level-2
+document.querySelector('.nav__link').addEventListener('click', function (e) { this.style.backgroundColor = randomColor(); e.stopPropagation(); });
+
+//child-level-1
+document.querySelector('.nav__links').addEventListener('click', function (e) { this.style.backgroundColor = randomColor(); e.stopPropagation(); });
+
+//parent
+document.querySelector('nav').addEventListener('click', function (e) { this.style.backgroundColor = randomColor(); });
+
+*/
+
+//---------------******************** EVENT CAPTURING PROPAGATION *************************
+
+/*
+
+//child-level-2
+document.querySelector('.nav__link').addEventListener('click', function (e) {
+  this.style.backgroundColor = randomColor();
+  console.log('LINK - ','Target : ',e.target,'Current-Target',e.currentTarget);
+  console.log('this',this);
+});
+
+//child-level-1
+document.querySelector('.nav__links').addEventListener('click', function (e) {
+  this.style.backgroundColor = randomColor();
+  console.log('CONTAINER - ','Target : ',e.target,'Current-Target',e.currentTarget);
+  console.log('this',this);});
+
+//parent
+document.querySelector('nav').addEventListener('click', function (e) {
+  this.style.backgroundColor = randomColor();
+  console.log('NAV PARENT - ','Target : ',e.target,'Current-Target',e.currentTarget);
+  console.log('this',this);},true);
+
+*/
+
+//
+
+//
+
+//
+
+//**------------------------------------------------- DOM TRAVERSING --------------------------------------------------*/
+
+//
+
+//
+
+/*
+
+const h1Traverse = document.querySelector('h1');
+console.log(h1Traverse);
+const h1Child = document.querySelectorAll('h1Traverse');
+console.log(h1Child);
+
+//---------------***************** Going DOWNWARD : CHILDREN **************---/
+console.log(h1Traverse.querySelectorAll('.highlight'));
+console.log(h1Traverse.childNodes);
+console.log(h1Traverse.children);
+h1Traverse.firstElementChild.style.color = 'white';
+h1Traverse.lastElementChild.style.color = 'teal';
+
+//---------------***************** Going UPWARDS : PARENT *****************---/
+
+console.log(h1Traverse.parentElement);
+console.log(h1Traverse.parentNode);
+
+h1Traverse.closest('.header').style.background = 'var(--gradient-secondary)';
+
+//---------------***************** Going SIDEWAYS: SIBLINGS ****************---/
+
+console.log(h1Traverse.previousElementSibling);
+console.log(h1Traverse.nextElementSibling);
+
+*/
+
+//
+
+//
+
+//
+
+//**-------------------------------------------------  --------------------------------------------------*/
+
+//
+
+//
+
