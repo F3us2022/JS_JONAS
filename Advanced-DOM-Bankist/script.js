@@ -108,7 +108,7 @@ tabsContainer.addEventListener('click', function (e) {
 
 
   //----------*********************  REMOVE ALL THE ACTIVE TAB  *****************---/
-  
+
   tabs.forEach(function (eleTab)
   {
     eleTab.classList.remove('operations__tab--active');
@@ -126,6 +126,91 @@ tabsContainer.addEventListener('click', function (e) {
   console.log(clicked.dataset.tab);
   document.querySelector(`.operations__content--${clicked.dataset.tab}`).classList.add('operations__content--active');
 })
+
+//
+
+//
+
+//
+//
+
+//**---------------------------------------- PASSING ARGUMENTS TO EVENT LISTENER ------------------------------------------*/
+
+//
+
+//
+
+const nav = document.querySelector('.nav');
+
+nav.addEventListener('mouseover', function (e) {
+  e.preventDefault();
+  if (e.target.classList.contains('nav__link')) {
+    const link = e.target;
+    const siblings = link.closest('.nav').querySelectorAll('.nav__link');
+    const logo = link.closest('.nav').querySelector('img');
+
+    siblings.forEach(elem=>{
+      if (elem !== link)  
+        elem.style.opacity = 0.5;})
+    logo.style.opacity = 0.5;
+  }
+});
+ 
+nav.addEventListener('mouseout', function (e) { 
+  e.preventDefault();
+  if (e.target.classList.contains('nav__link')) {
+    const link = e.target;
+    const siblings = link.closest('.nav').querySelectorAll('.nav__link');
+    const logo = link.closest('.nav').querySelector('img');
+
+    siblings.forEach(elem=>{ 
+      if (elem !== link) 
+        elem.style.opacity = 1;
+    })
+    logo.style.opacity = 1;
+  }
+});
+
+//
+
+//
+
+//
+//
+
+//**------------------------------------- ADDING STICKY SCROLL BAR (DONT USE BELOW)---------------------------------------*/
+
+//
+
+//
+
+/*
+
+const section_1 = document.querySelector('#section--1');
+const initialCords = section_1.getBoundingClientRect();
+
+window.addEventListener('scroll', function () {
+  if (window.scrollY > initialCords.top) nav.classList.add('sticky');
+  else
+    nav.classList.remove('sticky');
+ })
+*/
+
+//
+
+//
+//
+
+//**--------------------------------- STICKY SCROLL BAR USING INTERSECTION OBSERVER API --------------------------------*/
+
+//
+
+//
+
+ //
+
+//
+
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 //
