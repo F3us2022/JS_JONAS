@@ -463,6 +463,74 @@ console.log(Child.prototype.constructor);
 
 //
 
+/*
+
+//PARENT METHOD
+class PersonCl {
+  constructor(fullName, birthYear) {
+    this.fullName = fullName;
+    this.birthYear = birthYear;
+  }
+
+  // Instance methods
+  calcAge() {
+    console.log(2037 - this.birthYear);
+  }
+
+  greet() {
+    console.log(`Hey ${this.fullName}`);
+  }
+
+  get age() {
+    return 2037 - this.birthYear;
+  }
+
+  set fullName(name) {
+    if (name.includes(' ')) this._fullName = name;
+    else alert(`${name} is not a full name!`);
+  }
+
+  get fullName() {
+    return this._fullName;
+  }
+
+  // Static method
+  static hey() {
+    console.log('Hey there 👋');
+  }
+}
+
+//CHILD METHOD -- Without its own PROPERTIES or METHODS
+
+
+//class StudentCl extends PersonCl { };
+
+//const mike = new StudentCl('Mike Dean', 1990);
+//console.log(mike);
+//mike.calcAge();
+
+
+
+//CHILD METHOD -- With its own PROPERTIES or METHODS
+
+class StudentCl extends PersonCl { 
+    constructor(fullName, birthYear, course) {
+        super(fullName, birthYear)
+        this.course = course;
+    }
+
+    introduce() { console.log(`My name is ${this.fullName} and I study ${this.course}`) };
+
+    calcAge() {console.log(`I am ${2037 - this.birthYear} ears old , but I feel like I am ${2037 - this.birthYear + 10} Years`) }
+};
+
+const mike = new StudentCl('Mike Dean', 1990,'Science');
+console.log(mike);
+mike.calcAge();
+mike.introduce();
+
+*/
+
 // 
 
 //
@@ -476,3 +544,137 @@ console.log(Child.prototype.constructor);
 //
 
 // 
+
+/*
+
+//PARENT
+
+const PersonProto = {
+    calcAge() { 
+        console.log(2037-this.birthYear);
+    },
+
+    prop(firstName, birthYear) {
+        this.firstName = firstName;
+        this.birthYear = birthYear;
+
+    }
+}
+
+//CHILD
+const stevenProto = Object.create(PersonProto);
+stevenProto.prop = function (firstName, birthYear, course) { 
+    PersonProto.prop.call(this, firstName, birthYear);
+    this.course = course;
+}
+
+//Adding method to the CHILD CLASS
+
+stevenProto.introduce = function () {console.log(`My name is ${this.firstName} and i study course ${this.course}`) }
+//CHILD-Object
+const studentProto = Object.create(stevenProto);
+studentProto.prop('Pearl Harbour', 1997, 'Maths');
+console.log(studentProto);
+studentProto.calcAge();
+studentProto.introduce();
+
+*/
+
+// 
+
+//
+
+//
+
+//**--------------------------------------------- ENCAPSULATION AND CHAINING----------------------------------------------/
+
+//
+
+//
+
+// Encapsulation: Protected Properties and Methods
+// Encapsulation: Private Class Fields and Methods
+
+// 1) Public fields
+// 2) Private fields
+// 3) Public methods
+// 4) Private methods
+// (there is also the static version)
+
+class Account {
+  // 1) Public fields (instances)
+  locale = navigator.language;
+
+  // 2) Private fields (instances)
+  #movements = [];
+  #pin;
+
+  constructor(owner, currency, pin) {
+    this.owner = owner;
+    this.currency = currency;
+    this.#pin = pin;
+
+    // Protected property
+    // this._movements = [];
+    // this.locale = navigator.language;
+
+    console.log(`Thanks for opening an account, ${owner}`);
+  }
+
+  // 3) Public methods
+
+  // Public interface
+  getMovements() {
+    return this.#movements;
+  }
+
+  deposit(val) {
+    this.#movements.push(val);
+    return this;
+  }
+
+  withdraw(val) {
+    this.deposit(-val);
+    return this;
+  }
+
+  requestLoan(val) {
+    // if (this.#approveLoan(val)) {
+    if (this._approveLoan(val)) {
+      this.deposit(val);
+      console.log(`Loan approved`);
+      return this;
+    }
+  }
+
+  static helper() {
+    console.log('Helper');
+  }
+
+  // 4) Private methods
+  // #approveLoan(val) {
+  _approveLoan(val) {
+    return true;
+  }
+}
+
+const acc1 = new Account('Jonas', 'EUR', 1111);
+
+// acc1._movements.push(250);
+// acc1._movements.push(-140);
+// acc1.approveLoan(1000);
+
+acc1.deposit(250);
+acc1.withdraw(140);
+acc1.requestLoan(1000);
+console.log(acc1.getMovements());
+console.log(acc1);
+Account.helper();
+
+// console.log(acc1.#movements);
+// console.log(acc1.#pin);
+// console.log(acc1.#approveLoan(100));
+
+// Chaining
+acc1.deposit(300).deposit(500).withdraw(35).requestLoan(25000).withdraw(4000);
+console.log(acc1.getMovements());
