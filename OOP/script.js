@@ -242,3 +242,146 @@ console.log(jessica);
 
 //
 
+/*
+
+//WE USE SETTERS AND GETTERS when we want to use/call method/function as a property and not like methods/function
+
+//-------***************** Using GETTER and SETTER on OBJECT **************--/
+const account = {
+    owner: 'Jonas',
+    movement: [200, 530, 120, 300],
+    
+    get latest() {
+        return this.movement.splice(-1).pop();
+    },
+
+    set latest(move) {
+        this.movement.push(move);
+    }
+};
+
+console.log(account.latest);
+account.latest = 50;
+console.log(account)
+
+//--------************** Using GETTER and SETTER and STATIC METHOD on ES6 CLASS ***************--/
+
+class PersonCl { 
+    constructor(fullName, birthYear) {
+        this.fullName = fullName;
+        this.birthYear = birthYear;
+    }
+    
+    //This gets added to the prototype property
+    
+    calcAge() {
+        console.log(2037 - this.birthYear);
+     }
+
+    set fullName(name) {
+        if (name.includes(' '))
+        { this._fullName = name }
+        else { `alert ${name} is not a full Name` };
+    }
+
+    get fullName() { return this._fullName }
+    
+    static hey = function () { console.log('Hey There') };
+}
+ 
+const jessica = new PersonCl('Jessica Walter', 1992);
+console.log(jessica);
+PersonCl.hey();
+
+//NOTE --> STATIC method are not available on the object created ,but are only available to the CLASS.
+
+*/
+
+//
+
+//
+
+//**-------------------------------------------------- OBJECT.CREATE() -------------------------------------------------------/
+
+//
+
+//
+
+/*
+
+const PersonProto = {
+    calcAge() { 
+        console.log(2037-this.birthYear);
+    },
+
+    prop(firstName, birthYear) {
+        this.firstName = firstName;
+        this.birthYear = birthYear;
+
+    }
+}
+
+const steven = Object.create(PersonProto);
+console.log(steven.prop('steven', 1990));
+console.log(steven);
+steven.calcAge();
+
+*/
+
+//
+
+//
+
+//**------------------------------------------------- Coding Challenge #2 --------------------------------------------------/
+
+//
+
+//
+
+// 
+
+/* 
+1. Re-create challenge 1, but this time using an ES6 class;
+2. Add a getter called 'speedUS' which returns the current speed in mi/h (divide by 1.6);
+3. Add a setter called 'speedUS' which sets the current speed in mi/h (but converts it to km/h before storing the value, by multiplying the input by 1.6);
+4. Create a new car and experiment with the accelerate and brake methods, and with the getter and setter.
+
+DATA CAR 1: 'Ford' going at 120 km/h
+
+GOOD LUCK 😀
+*/
+
+/*
+class CarCl {
+  constructor(make, speed) {
+    this.make = make;
+    this.speed = speed;
+  }
+
+  accelerate() {
+    this.speed += 10;
+    console.log(`${this.make} is going at ${this.speed} km/h`);
+  }
+
+  brake() {
+    this.speed -= 5;
+    console.log(`${this.make} is going at ${this.speed} km/h`);
+  }
+
+  get speedUS() {
+    return this.speed / 1.6;
+  }
+
+  set speedUS(speed) {
+    this.speed = speed * 1.6;
+  }
+}
+
+const ford = new CarCl('Ford', 120);
+console.log(ford.speedUS);
+ford.accelerate();
+ford.accelerate();
+ford.brake();
+ford.speedUS = 50;
+console.log(ford);
+*/
