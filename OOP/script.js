@@ -384,4 +384,95 @@ ford.accelerate();
 ford.brake();
 ford.speedUS = 50;
 console.log(ford);
+
 */
+
+//
+
+//
+
+//**-------------------------------INHERIHERITANCE BETWEEN CLASSES - CONSTRUCTOR FUNCTION ----------------------------------/
+
+//
+
+//
+
+//
+
+/*
+const Parent = function (firstName, birthYear) {
+    this.firstName = firstName;
+    this.birthYear = birthYear
+}
+ 
+Parent.prototype.calcAge = function () { console.log(2037 - this.birthYear) }
+
+
+//----------******** WITHOUT LINKING PARENT-CHILD PROTOTYPE *****---/
+// const Child = function (firstName, birthYear, course) {
+//     this.course = course;
+//     Parent.call(this, firstName, birthYear);
+// }
+ 
+// Child.prototype.introduce = function () { console.log(`My name is ${firstName} and I study ${this.course}`) }
+
+// const mike = new Child('Mike', 1990, 'Science');
+// console.log(mike);
+// mike.calcAge(); // This isnt working yet as CHILD PROTOTYPE isnt INHERITING PARENT PROTOTYPE
+//console.log(mike.__proto__);
+//console.log(mike.__proto__.__proto__);
+//console.log(mike instanceof Child);
+//console.log(mike instanceof Parent);
+//console.log(mike instanceof Object);
+
+//----------******** LINKING PARENT-CHILD PROTOTYPE *****---/
+const Child = function (firstName, birthYear, course) {
+    this.course = course;
+    Parent.call(this, firstName, birthYear);
+}
+Child.prototype = Object.create(Parent.prototype);
+Child.prototype.introduce = function () { console.log(`My name is ${firstName} and I study ${this.course}`) }
+
+const mike = new Child('Mike', 1990, 'Science');
+console.log(mike);
+mike.calcAge(); // This is working now after linking the prototypes (COMPLETE INHERITANCE)
+
+console.log(mike.__proto__);
+console.log(mike.__proto__.__proto__);
+console.log(mike instanceof Child);
+console.log(mike instanceof Parent);
+console.log(mike instanceof Object);
+
+//---------********* LINKING THE CONSTRUCTOR ********---/
+
+console.log(Child.prototype.constructor);
+Child.prototype.constructor = Child;
+console.log(Child.prototype.constructor);
+
+*/
+
+//
+
+//
+
+//
+
+//**-------------------------------INHERIHERITANCE BETWEEN CLASSES - ES6 CLASS --------------------------------------------/
+
+//
+
+//
+
+// 
+
+//
+
+//
+
+//**-------------------------------INHERIHERITANCE BETWEEN CLASSES - OBJECT.CREATE() ---------------------------------------/
+
+//
+
+//
+
+// 
