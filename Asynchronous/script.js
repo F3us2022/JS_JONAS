@@ -378,7 +378,7 @@ getCountryData('spain');
 
 //
 
-//------------------------------------------------- THROWING ERRORS MANUALLY -------------------------------------------- */
+//--------------------------------------------- THROWING ERRORS MANUALLY -------------------------------------------- */
 
 //
 
@@ -516,3 +516,33 @@ btn.addEventListener('click', function () {
 });
 
 // getCountryData('australia');
+
+//-------------------------------------- PROMISES (ALL/RACE/ANY/ALL SETTLED) ----------------------------------------- */
+
+// Promise.allSettled([
+//   Promise.resolve('success'),
+// Promise.reject('rejected'),
+// Promise.resolve('resolve'),
+// ]).then(res => console.log(res))
+//   .catch((err)=> console.log(err));
+
+// Promise.all([
+//   Promise.resolve('success'),
+// Promise.reject('rejected'),
+// Promise.resolve('resolve'),
+// ]).then(res => console.log(res))
+//   .catch((err)=> console.log(err));
+
+// Promise.any([
+//   Promise.resolve('success'),
+// Promise.reject('rejected'),
+// Promise.resolve('resolve'),
+// ]).then(res => console.log(res))
+//   .catch((err)=> console.log(err));
+
+// Promise.race([
+//   Promise.resolve('success'),
+// Promise.reject('rejected'),
+// Promise.resolve('resolve'),
+// ]).then(res => console.log(res))
+//   .catch((err)=> console.log(err));
